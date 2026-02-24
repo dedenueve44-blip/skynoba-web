@@ -4,268 +4,81 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SkyNova Airlines</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
 body{
+font-family:Arial;
+margin:0;
 background:#0f2027;
 color:white;
-scroll-behavior:smooth;
-}
-
-/* NAVBAR */
-
-nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 8%;
-background:rgba(0,0,0,0.4);
-position:fixed;
-width:100%;
-z-index:1000;
-backdrop-filter:blur(10px);
-}
-
-nav h1{
-font-size:22px;
-font-weight:700;
-}
-
-nav ul{
-display:flex;
-gap:30px;
-list-style:none;
-}
-
-nav ul li a{
-color:white;
-text-decoration:none;
-font-weight:500;
-transition:0.3s;
-}
-
-nav ul li a:hover{
-color:#00c6ff;
-}
-
-/* HERO */
-
-.hero{
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
 text-align:center;
-padding:0 20px;
+}
+.hero{
+padding:100px 20px;
 background:linear-gradient(to right,#0f2027,#203a43,#2c5364);
 }
-
-.hero h2{
-font-size:50px;
-margin-bottom:20px;
-}
-
-.hero p{
-font-size:18px;
-max-width:600px;
-margin-bottom:30px;
-}
-
-.btn{
-padding:14px 35px;
-border:none;
-border-radius:30px;
-background:#00c6ff;
-color:white;
-font-weight:600;
-cursor:pointer;
-transition:0.3s;
-}
-
-.btn:hover{
-background:#0072ff;
-}
-
-/* SEARCH BOX */
-
-.search-box{
-background:white;
-color:black;
-padding:30px;
-border-radius:15px;
-margin-top:40px;
-width:90%;
-max-width:800px;
-box-shadow:0 10px 30px rgba(0,0,0,0.4);
-}
-
-.search-box input{
+input,button{
 padding:10px;
 margin:10px;
-width:30%;
-border:1px solid #ccc;
-border-radius:8px;
-}
-
-.search-box button{
-padding:10px 20px;
-background:#0072ff;
-color:white;
+border-radius:5px;
 border:none;
-border-radius:8px;
+}
+button{
+background:#00c6ff;
+color:white;
 cursor:pointer;
 }
-
-/* SERVICES */
-
-.section{
-padding:100px 8%;
-text-align:center;
+.result{
+margin-top:30px;
+background:white;
+color:black;
+padding:20px;
+border-radius:10px;
+display:inline-block;
 }
-
-.section h2{
-font-size:36px;
-margin-bottom:50px;
-}
-
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:30px;
-}
-
-.card{
-background:rgba(255,255,255,0.1);
-padding:30px;
-border-radius:15px;
-transition:0.3s;
-}
-
-.card:hover{
-transform:translateY(-10px);
-background:rgba(255,255,255,0.2);
-}
-
-/* DESTINOS */
-
-.destinos{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:25px;
-}
-
-.destino{
-background:linear-gradient(to right,#141e30,#243b55);
-padding:40px;
-border-radius:15px;
-}
-
-/* FOOTER */
-
-footer{
-background:#000;
-text-align:center;
-padding:30px;
-margin-top:60px;
-font-size:14px;
-}
-
-@media(max-width:768px){
-.hero h2{
-font-size:35px;
-}
-.search-box input{
-width:100%;
-}
-}
-
 </style>
 </head>
 <body>
 
-<nav>
-<h1>✈ SkyNova</h1>
-<ul>
-<li><a href="#">Inicio</a></li>
-<li><a href="#servicios">Servicios</a></li>
-<li><a href="#destinos">Destinos</a></li>
-<li><a href="#contacto">Contacto</a></li>
-</ul>
-</nav>
+<div class="hero">
+<h1>✈ SkyNova Airlines</h1>
+<h2>Reserva tu vuelo ahora</h2>
 
-<section class="hero">
-<h2>Vuela Más Alto</h2>
-<p>Descubre una experiencia premium en viajes aéreos con tecnología, seguridad y comodidad de clase mundial.</p>
-<button class="btn">Reservar Ahora</button>
+<input type="text" id="origen" placeholder="Origen">
+<input type="text" id="destino" placeholder="Destino">
+<input type="date" id="fecha">
+<br>
+<button onclick="buscarVuelo()">Buscar Vuelo</button>
 
-<div class="search-box">
-<h3>Buscar Vuelo</h3>
-<input type="text" placeholder="Origen">
-<input type="text" placeholder="Destino">
-<input type="date">
-<button>Buscar</button>
+<div id="resultado"></div>
+
 </div>
 
-</section>
+<script>
+function buscarVuelo(){
 
-<section class="section" id="servicios">
-<h2>Nuestros Servicios</h2>
-<div class="cards">
-<div class="card">
-<h3>🌎 Vuelos Internacionales</h3>
-<p>Conectamos los principales destinos del mundo.</p>
-</div>
-<div class="card">
-<h3>💼 Clase Ejecutiva</h3>
-<p>Asientos premium y servicio exclusivo.</p>
-</div>
-<div class="card">
-<h3>📶 WiFi a Bordo</h3>
-<p>Conectividad total durante todo el vuelo.</p>
-</div>
-<div class="card">
-<h3>🎁 Programa de Millas</h3>
-<p>Acumula puntos y viaja gratis.</p>
-</div>
-</div>
-</section>
+let origen = document.getElementById("origen").value;
+let destino = document.getElementById("destino").value;
+let fecha = document.getElementById("fecha").value;
 
-<section class="section" id="destinos">
-<h2>Destinos Populares</h2>
-<div class="destinos">
-<div class="destino">
-<h3>🇺🇸 Nueva York</h3>
-<p>Desde $499</p>
-</div>
-<div class="destino">
-<h3>🇪🇸 Madrid</h3>
-<p>Desde $699</p>
-</div>
-<div class="destino">
-<h3>🇯🇵 Tokio</h3>
-<p>Desde $899</p>
-</div>
-</div>
-</section>
+if(origen === "" || destino === "" || fecha === ""){
+document.getElementById("resultado").innerHTML = "<p style='color:red;'>Completa todos los campos</p>";
+return;
+}
 
-<section class="section" id="contacto">
-<h2>Contacto</h2>
-<p>Email: contacto@skynova.com</p>
-<p>Teléfono: +593 999 999 999</p>
-</section>
+let precio = Math.floor(Math.random() * 500) + 200;
 
-<footer>
-© 2026 SkyNova Airlines - Todos los derechos reservados
-</footer>
+document.getElementById("resultado").innerHTML = `
+<div class="result">
+<h3>Vuelo Disponible</h3>
+<p><strong>Origen:</strong> ${origen}</p>
+<p><strong>Destino:</strong> ${destino}</p>
+<p><strong>Fecha:</strong> ${fecha}</p>
+<p><strong>Precio:</strong> $${precio}</p>
+<button onclick="alert('Reserva confirmada ✈')">Reservar</button>
+</div>
+`;
+}
+</script>
 
 </body>
 </html>
